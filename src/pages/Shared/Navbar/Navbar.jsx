@@ -23,7 +23,7 @@ const Navbar = () => {
           </ul>
         </div>
         <Link to="/">
-          <img src={logo} alt="Car doctor logo" />
+          <img className="max-w-[4rem] lg:max-w-28" src={logo} alt="Car doctor logo" />
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
