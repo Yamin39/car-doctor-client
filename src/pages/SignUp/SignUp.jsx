@@ -2,20 +2,29 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 
-const Login = () => {
-  const { logIn } = useContext(AuthContext);
+const SignUp = () => {
+  const { createUser, updateName, profileLoader, setProfileLoader } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
+    const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
+    console.log(name, email, password);
 
-    logIn(email, password)
+    createUser(email, password)
       .then((res) => {
         console.log(res?.user);
-        form.reset();
+        updateName(res?.user, name)
+          .then((result) => {
+            console.log(result);
+            setProfileLoader(!profileLoader);
+            form.reset();
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((err) => {
         console.log(err?.message);
@@ -24,8 +33,21 @@ const Login = () => {
   return (
     <div className="py-20 flex justify-center items-center">
       <div className="w-full max-w-md p-8 space-y-3 rounded-xl bg-gray-50 text-gray-800 shadow-2xl">
-        <h1 className="text-2xl font-bold text-center">Login</h1>
+        <h1 className="text-2xl font-bold text-center">SignUp</h1>
         <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="space-y-1 text-sm">
+            <label htmlFor="name" className="block text-gray-600">
+              Name
+            </label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              placeholder="Name"
+              className="w-full px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-gray-800 focus:border-blue-600"
+              required
+            />
+          </div>
           <div className="space-y-1 text-sm">
             <label htmlFor="email" className="block text-gray-600">
               Email
@@ -57,11 +79,11 @@ const Login = () => {
               </a>
             </div>
           </div>
-          <button className="btn btn-primary w-full">Login</button>
+          <button className="btn btn-primary w-full">Sign Up</button>
         </form>
         <div className="flex items-center pt-4 space-x-1">
           <div className="flex-1 h-px sm:w-16 bg-gray-300" />
-          <p className="px-3 text-sm text-gray-600">Login with social accounts</p>
+          <p className="px-3 text-sm text-gray-600">Sign up with social accounts</p>
           <div className="flex-1 h-px sm:w-16 bg-gray-300" />
         </div>
         <div className="flex justify-center space-x-4">
@@ -82,9 +104,9 @@ const Login = () => {
           </button>
         </div>
         <p className="text-xs text-center sm:px-6 text-gray-600">
-          Don&apos;t have an account?
-          <Link to="/signUp" className="btn btn-link">
-            Sign Up
+          Already have an account?
+          <Link to="/login" className="btn btn-link">
+            Login
           </Link>
         </p>
       </div>
@@ -92,4 +114,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
