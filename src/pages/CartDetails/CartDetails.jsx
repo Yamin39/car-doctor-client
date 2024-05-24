@@ -1,14 +1,16 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { AuthContext } from "../../providers/AuthProvider";
 
 const CartDetails = () => {
   const { user } = useContext(AuthContext);
   const [cartDetails, setCartDetails] = useState([]);
+  const axiosSecure = useAxiosSecure();
 
   const getBookings = () => {
-    axios.get(`http://localhost:5000/bookings/?email=${user?.email}`, { withCredentials: true }).then((data) => {
-      setCartDetails(data.data);
+    axiosSecure.get(`/bookings/?email=${user?.email}`).then((data) => {
+      setCartDetails(data?.data);
     });
   };
   useEffect(() => {
