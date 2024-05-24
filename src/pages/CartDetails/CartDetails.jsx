@@ -33,7 +33,7 @@ const CartDetails = () => {
             </tr>
           </thead>
           <tbody>
-            {cartDetails.map((cartDetail) => {
+            {cartDetails?.map((cartDetail) => {
               const { _id, img, service, date, price } = cartDetail;
               const handleDelete = (id) => {
                 const proceed = confirm("Are you sure! It will be deleted permanently");
