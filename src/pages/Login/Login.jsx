@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
@@ -19,8 +20,12 @@ const Login = () => {
     logIn(email, password)
       .then((res) => {
         console.log(res?.user);
-        form.reset();
-        navigate(state || "/");
+        axios.post("http://localhost:5000/jwt", { email }, { withCredentials: true }).then((res) => {
+          console.log(res.data);
+          if (res.data.success) {
+            navigate(state || "/");
+          }
+        });
       })
       .catch((err) => {
         console.log(err?.message);

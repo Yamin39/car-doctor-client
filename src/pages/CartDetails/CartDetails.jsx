@@ -7,7 +7,7 @@ const CartDetails = () => {
   const [cartDetails, setCartDetails] = useState([]);
 
   const getBookings = () => {
-    axios.get(`http://localhost:5000/bookings/?email=${user?.email}`).then((data) => {
+    axios.get(`http://localhost:5000/bookings/?email=${user?.email}`, { withCredentials: true }).then((data) => {
       setCartDetails(data.data);
     });
   };
