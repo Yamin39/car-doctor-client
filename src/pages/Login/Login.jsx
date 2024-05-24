@@ -15,13 +15,13 @@ const Login = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
+    // console.log(email, password);
 
     logIn(email, password)
       .then((res) => {
-        console.log(res?.user);
-        axios.post("http://localhost:5000/jwt", { email }, { withCredentials: true }).then((res) => {
-          console.log(res.data);
+        // console.log(res?.user);
+        axios.post("https://car-doctor-server-pi-jet.vercel.app/jwt", { email }, { withCredentials: true }).then((res) => {
+          // console.log(res.data);
           if (res.data.success) {
             navigate(state || "/");
           }
@@ -36,7 +36,7 @@ const Login = () => {
     // googleSignIn()
     logInWithGoogle()
       .then((result) => {
-        console.log(result.user);
+        // console.log(result.user);
         navigate(state || "/");
       })
       .catch((error) => {

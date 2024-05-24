@@ -38,7 +38,7 @@ const CartDetails = () => {
               const handleDelete = (id) => {
                 const proceed = confirm("Are you sure! It will be deleted permanently");
                 if (proceed) {
-                  axios.delete(`http://localhost:5000/bookings/${id}`).then((data) => {
+                  axios.delete(`https://car-doctor-server-pi-jet.vercel.app/bookings/${id}`).then((data) => {
                     console.log(data.data);
                     // const remaining = cartDetails.filter((cartDetail) => cartDetail._id !== id);
                     // setCartDetails(remaining);
@@ -51,7 +51,7 @@ const CartDetails = () => {
               };
 
               const handleConfirm = (id) => {
-                axios.patch(`http://localhost:5000/bookings/${id}`, { status: "Confirmed" }).then((data) => {
+                axios.patch(`https://car-doctor-server-pi-jet.vercel.app/bookings/${id}`, { status: "Confirmed" }).then((data) => {
                   console.log(data.data);
                   if (data.data.modifiedCount) {
                     const remaining = cartDetails.filter((cartDetail) => cartDetail._id !== id);

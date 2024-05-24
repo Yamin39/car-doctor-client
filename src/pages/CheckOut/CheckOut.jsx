@@ -26,7 +26,7 @@ const CheckOut = () => {
       price,
     };
 
-    axios.post("http://localhost:5000/bookings", order).then((data) => {
+    axios.post("https://car-doctor-server-pi-jet.vercel.app/bookings", order).then((data) => {
       console.log(data?.data);
       if (data?.data?.insertedId) {
         alert("Service Booked Successfully");
